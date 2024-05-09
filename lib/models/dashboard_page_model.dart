@@ -30,9 +30,9 @@ class DashboardPageModel extends ChangeNotifier {
     var services = await bluetoothModel.discoverServices(deviceIdTemp);
     debugPrint('services: ${services.length}');
     for (var service in services) {
-      var serviceUuid = service.serviceId;
+      var serviceUuid = service.id;
       var serviceIdStr = serviceUuid.toString().trim().toLowerCase();
-      var characteristicIds = service.characteristicIds;
+      var characteristicIds = service.characteristics.map((e) => e.id);
       if (serviceIdStr.contains('183e')) {
         // physical activity monitor service
         debugPrint('found physical activity monitor service');

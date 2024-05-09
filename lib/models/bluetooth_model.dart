@@ -92,8 +92,9 @@ class BluetoothModel extends ChangeNotifier {
     });
   }
 
-  Future<List<DiscoveredService>> discoverServices(String deviceId) {
-    return _flutterReactiveBle.discoverServices(deviceId);
+  Future<List<Service>> discoverServices(String deviceId) {
+    _flutterReactiveBle.discoverAllServices(deviceId);
+    return _flutterReactiveBle.getDiscoveredServices(deviceId);
   }
 
   Future<List<int>> getCharacteristicData(QualifiedCharacteristic c) {
