@@ -37,7 +37,8 @@ class BluetoothModel extends ChangeNotifier {
             'deviceIds contains ${device.id}: ${_deviceIds.contains(device.id)}');
         debugPrint('new device: ${device.name}');
         _deviceIds.add(device.id);
-        _devices.add(BluetoothDevice(device, 'unknown'));
+        _devices.add(BluetoothDevice(device, device.id));
+        _devices.sort((a, b) => a.status.compareTo(b.status));
         notifyListeners();
       }
     }, onError: (err) {

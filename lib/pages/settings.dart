@@ -25,22 +25,12 @@ class SettingsPage extends StatelessWidget {
                   children: [
                     const SizedBox(width: 20),
                     CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.grey.shade400,
-                      child: ClipOval(
-                        child: AspectRatio(
-                          aspectRatio: 1,
-                          child: (userModel.getUser() != null
-                              ? (userModel.getUser()?.photoURL != null
-                                  ? Image.network(
-                                      userModel.getUser()?.photoURL ?? '',
-                                      fit: BoxFit.cover,
-                                    )
-                                  : const Icon(Icons.person_rounded))
-                              : const Icon(Icons.person_rounded)),
-                        ),
-                      ),
-                    ),
+                        radius: 20,
+                        backgroundColor: Colors.grey.shade400,
+                        child: ClipOval(
+                            child: AspectRatio(
+                                aspectRatio: 1,
+                                child: const Icon(Icons.person_rounded)))),
                     const SizedBox(width: 20),
                     Expanded(
                       child: Column(

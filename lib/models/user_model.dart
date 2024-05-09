@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserModel extends ChangeNotifier {
@@ -14,6 +14,13 @@ class UserModel extends ChangeNotifier {
   }
 
   Stream<User?> subscribeToUserChanges() {
-    return FirebaseAuth.instance.userChanges();
+    return Stream.empty();
+    // return FirebaseAuth.instance.userChanges();
   }
+}
+
+class User {
+  get displayName => null;
+
+  get email => null;
 }
