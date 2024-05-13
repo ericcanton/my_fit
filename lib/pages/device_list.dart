@@ -16,7 +16,7 @@ class DeviceListPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Fit'),
+          title: const Text('MiBand BLE Raw Hardware'),
           centerTitle: true,
         ),
         body: Center(
@@ -55,7 +55,7 @@ class DeviceListPage extends StatelessWidget {
   Widget getListItem(
       BluetoothDevice device, BuildContext context, BluetoothModel model) {
     final name = device.device.name;
-    String status = device.status;
+    String status = device.status?.name ?? "UNKNOWN";
     return ListTile(
       title: Text(name),
       subtitle: Text(status),

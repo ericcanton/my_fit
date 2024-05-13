@@ -37,8 +37,8 @@ class BluetoothModel extends ChangeNotifier {
             'deviceIds contains ${device.id}: ${_deviceIds.contains(device.id)}');
         debugPrint('new device: ${device.name}');
         _deviceIds.add(device.id);
-        _devices.add(BluetoothDevice(device, device.id));
-        _devices.sort((a, b) => a.status.compareTo(b.status));
+        _devices.add(BluetoothDevice(device, null));
+        _devices.sort();
         notifyListeners();
       }
     }, onError: (err) {
@@ -68,27 +68,8 @@ class BluetoothModel extends ChangeNotifier {
         .listen((event) {
       DeviceConnectionState status = event.connectionState;
       int index = _deviceIds.indexOf(deviceId);
-      switch (status) {
-        case DeviceConnectionState.connected:
-          _devices[index].status = 'Connected';
-          notifyListeners();
-          break;
-        case DeviceConnectionState.connecting:
-          _devices[index].status = 'Connecting';
-          notifyListeners();
-          break;
-        case DeviceConnectionState.disconnected:
-          _devices[index].status = 'Disconnected';
-          notifyListeners();
-          break;
-        case DeviceConnectionState.disconnecting:
-          _devices[index].status = 'Disconnecting';
-          notifyListeners();
-          break;
-        default:
-          _devices[index].status = 'Unknown';
-          notifyListeners();
-      }
+      _devices[index].status = status;
+      notifyListeners();
     });
   }
 
