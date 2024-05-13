@@ -53,6 +53,7 @@ dependencies:
 
   # launcher icon
   flutter_launcher_icons: "^0.13.1"
+  uuid: ^4.4.0
 
   # firebase
 

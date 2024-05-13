@@ -31,7 +31,7 @@ class BluetoothModel extends ChangeNotifier {
     _subscription = _flutterReactiveBle.scanForDevices(
         withServices: [], scanMode: ScanMode.lowLatency).listen((device) {
       //code for handling results
-      debugPrint('device: ${device.name} ${device.id}');
+      // debugPrint('device: ${device.name} ${device.id}');
       if (device.name.trim() != '' && !_deviceIds.contains(device.id)) {
         debugPrint(
             'deviceIds contains ${device.id}: ${_deviceIds.contains(device.id)}');
@@ -84,5 +84,14 @@ class BluetoothModel extends ChangeNotifier {
 
   Stream<List<int>> subscribeToCharacteristic(QualifiedCharacteristic c) {
     return _flutterReactiveBle.subscribeToCharacteristic(c);
+  }
+
+  Future<void> writeCharacteristicWithResponse(
+      QualifiedCharacteristic c, List<int> data) {
+    return _flutterReactiveBle.writeCharacteristicWithResponse(c, value: data);
+  }
+
+  Future<void> writeCharacteristic(QualifiedCharacteristic c, List<int> data) {
+    return _flutterReactiveBle.writeCharacteristicWithResponse(c, value: data);
   }
 }

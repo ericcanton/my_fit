@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_fit/utils/date_time_utils.dart';
+import 'dart:typed_data';
 
 class BluetoothUtils {
   static int getHR(List<int> values) {
@@ -22,8 +23,8 @@ class BluetoothUtils {
   }
 
   static int getBatteryLevel(List<int> values) {
-    if (values.isNotEmpty) {
-      return values[0];
+    if (values.length >= 2) {
+      return values[1];
     } else {
       return -1;
     }
@@ -119,5 +120,19 @@ class BluetoothUtils {
       }
     }
     return data;
+  }
+
+  static List<Map<String, int>> getGyro(List<int> bytes) {
+    var res = <Map<String, int>>[];
+    var buffer = Int16List.fromList(bytes).buffer;
+    for (var i = 0; i < 3; i++) {
+      var byteData = ByteData.view(buffer, 2 + i * 6, 6);
+      res.add({
+        'x': byteData.getInt16(0, Endian.little),
+        'y': byteData.getInt16(2, Endian.little),
+        'wtf': byteData.getInt16(4, Endian.little),
+      });
+    }
+    return res;
   }
 }
